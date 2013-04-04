@@ -15,11 +15,6 @@
        float: left;
         padding: 10px;
        margin: 5px;
-       -moz-box-shadow: 5px 5px 5px #333333;
-       -webkit-box-shadow: 5px 5px 11px #333333;
-       -o-box-shadow: 5px 5px 11px #333333;
-       -ms-box-shadow: 5px 5px 11px #333333;
-       box-shadow: 5px 5px 11px #333333;
        // border-radius: 15px;
         font-size: 0.5em;
    }
