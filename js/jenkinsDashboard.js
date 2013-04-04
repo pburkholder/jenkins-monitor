@@ -39,7 +39,7 @@ var jenkinsDashboard = {
             jobs_to_be_filtered = config.jobs_to_be_filtered,
             jobs_to_be_excluded = config.jobs_to_be_excluded;
         $.each(jobs, function () {
-            if ((jobs_to_be_filtered.length === 0 || $.inArray(this.name, jobs_to_be_filtered) !== -1) && ($.inArray(this.name, jobs_to_be_excluded) === -1)) {
+            if ((jobs_to_be_filtered.length === 0 || $.inArray(this.name, jobs_to_be_filtered) !== -1) && ($.inArray(this.name, jobs_to_be_excluded) === -1) && this.color != 'grey' && this.color != 'disabled') {
                 fragment += ("<article class=" + this.color + "><head>" + this.name + "</head></article>");
             }
         });
@@ -100,7 +100,7 @@ $(document).ready(function () {
                     }
                 }
             });
-            soundQueue.play();
+         //   soundQueue.play();
         }, 4000);
 
 });
