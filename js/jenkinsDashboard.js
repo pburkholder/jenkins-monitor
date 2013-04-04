@@ -73,7 +73,10 @@ $(document).ready(function () {
     var ci_url = config.ci_url + "/api/json",
         counter = 0,
         lastData = null,
-        auto_refresh = setInterval(function () {
+        auto_refresh;
+
+    if (!ci_url.match(/^http/)) { ci_url = "http://" + ci_url; }
+    auto_refresh = setInterval(function () {
             counter++;
             $.jsonp({
                 url: ci_url + "?format=json&jsonp=?",
