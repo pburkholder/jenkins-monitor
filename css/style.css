@@ -1,7 +1,7 @@
 body {
   padding: 10px;
   margin: 5px;
-  font: 3.1em Helvetica, Arial, sans-serif;
+  font: 32px Helvetica, Arial, sans-serif;
   background-color: #FFF;
 }
 
@@ -17,6 +17,11 @@ body {
 section {
   display: inline-block;
   width: 178px;
+  height: 800px;
+}
+
+section:nth-of-type(odd) {
+  background-color: #f3f3f3;
 }
 
 h1 {
@@ -25,14 +30,16 @@ h1 {
 }
 
 article {
-  width: 160px;
+  width: 72px;
+  height: 42px;
   color: #FFF;
   background-color: gray;
   float: left;
   padding: 5px;
   margin: 2.5px;
   border-radius: 5px;
-  font-size: 16px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 .disabled, .aborted{
@@ -44,9 +51,9 @@ article {
 }
 
 @-webkit-keyframes pulse {
-    0%   { background-color: #3861b6; }
-    50%  { background-color: #88a0d3; }
-    100% { background-color: #3861b6; }
+  0%   { background-color: #3861b6; }
+  50%  { background-color: #88a0d3; }
+  100% { background-color: #3861b6; }
 }
 
 .blue_anime, .red_anime, .yellow_anime, .aborted_anime {

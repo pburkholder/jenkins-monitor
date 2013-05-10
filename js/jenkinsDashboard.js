@@ -26,7 +26,7 @@ var jenkinsDashboard = {
 
     content += jenkinsDashboard.composeHtmlEnvironmentSections(jobs);
     dashboardLastUpdatedTime = new Date();
-    content += "<article class='time'>" + dashboardLastUpdatedTime.toString('dd, MMMM ,yyyy')  + "</article>";
+    content += "<article class='time'>" + dashboardLastUpdatedTime.toLocaleString()  + "</article>";
 
     $("#content").html(content);
   },
@@ -40,6 +40,8 @@ var jenkinsDashboard = {
 
       jobs.forEach(function(job) {
         if (job.name.match(environment)) {
+          // Remove the environment name from the job to reduce clutter.
+          job.name = job.name.replace(new RegExp("(-)?(?!firefox)" + environment), "");
           matches.push(job);
         }
       });
