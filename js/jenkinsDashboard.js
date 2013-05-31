@@ -39,7 +39,7 @@ var jenkinsDashboard = {
       var matches = new Array;
 
       jobs.forEach(function(job) {
-        if (job.name.match(environment)) {
+        if (job.name.match(new RegExp(environment + "$"))) {
           // Remove the environment name from the job to reduce clutter.
           job.name = job.name.replace(new RegExp("(-)?(?!firefox)" + environment), "");
           matches.push(job);
