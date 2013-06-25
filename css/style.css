@@ -50,14 +50,24 @@ article {
   background:#749a02;
 }
 
-@-webkit-keyframes pulse {
+@-webkit-keyframes blue-pulse {
   0%   { background-color: #3861b6; }
   50%  { background-color: #88a0d3; }
   100% { background-color: #3861b6; }
 }
 
-.blue_anime, .red_anime, .yellow_anime, .aborted_anime {
-  -webkit-animation: pulse 4s infinite;
+.blue_anime {
+  -webkit-animation: blue-pulse 4s infinite;
+}
+
+@-webkit-keyframes red-pulse {
+  0%   { background-color: #a01208; }
+  50%  { background-color: #e8c6c4; }
+  100% { background-color: #a01208; }
+}
+
+.red_anime, .yellow_anime, .aborted_anime {
+  -webkit-animation: red-pulse 4s infinite;
 }
 
 .yellow {
