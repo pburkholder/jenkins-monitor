@@ -29,6 +29,7 @@ var jenkinsDashboard = {
       }
     });
     dashboardLastUpdatedTime = new Date();
+    fragment += "<article class='utctime'>" + dashboardLastUpdatedTime.toUTCString('dd, MMMM ,yyyy')  + "</article>";
     fragment += "<article class='time'>" + dashboardLastUpdatedTime.toString('dd, MMMM ,yyyy')  + "</article></section>";
     $("#content").html(fragment);
   },

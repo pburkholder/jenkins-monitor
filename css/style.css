@@ -37,7 +37,8 @@ article {
   margin: 2.5px;
   border-radius: 5px;
   font-weight: bold;
-  font-size: 18px;
+  /* font-size: 20px; */
+  font-size: 0.6em;
 }
 
 .disabled, .aborted{
@@ -79,12 +80,25 @@ article {
   position: absolute;
   bottom: 5px;
   right: 5px;
-  font-size:0.8em;
+  font-size:0.6em;
   background: none;
   color: #333;
   background: #CCC;
   opacity: 0.7;
   box-shadow: none;
+  font-weight: bold;
+}
+.utctime{
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  font-size:0.6em;
+  background: none;
+  color: #333;
+  background: #CCC;
+  opacity: 0.7;
+  box-shadow: none;
+  font-weight: bold;
 }
 
 .job_disabled_or_aborted {
@@ -95,7 +109,7 @@ article {
   border: 8px dashed black;
   margin: 0;
   padding: 10px;
-  font-size: 24px;
+  font-size: 22px;
 }
 .workon{
   opacity:.8;
