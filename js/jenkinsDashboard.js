@@ -1,13 +1,6 @@
 /*jslint browser:true, sloppy: true, plusplus: true */
 /*globals $: false, config: false */
 
-var dashboardLastUpdatedTime = new Date();
-here_and_now = new Date
-var now = new Date();
-var now_utc = new Date();
-var now_pt = new Date();
-var now_et = new Date();
-
 var jenkinsDashboard = {
   addTimestampToBuild : function (elements) {
     elements.each(function () {
@@ -36,17 +29,22 @@ var jenkinsDashboard = {
 
 
     var now = new Date();
-    if ( now.getTimezoneOffset < 301 ) { 
+    var eastern;
+    var pacific;
+    /* This only works if you're in Eastern or Pacific time */
+    if ( now.getTimezoneOffset() < 301 ) {  
       eastern = now; 
-      pacific = now + ( 3 * 60 * 1000 );
+      pacific = new Date(now.getTime() + ( 3 * 60 * 60 * 1000 ))
     } else {
       pacific = now;
-      eastern = now - ( 3 * 60 * 1000 );
-    }
+      eastern = new Date(now.getTime() - ( 3 * 60 * 60 * 1000 ))
+    } 
     var utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
 
     fragment += "<article class='utctime'>" + "UTC: " + strftime('%F %T', utc)  + "</article>";
-    fragment += "<article class='time'>" + "Eastern: " + strftime('%F %T', now)  + "</article></section>";
+    fragment += "<article class='et_time'>" + "Eastern: " + strftime('%F %T', now)  + "</article>"
+    fragment += "<article class='pt_time'>" + "Pacific: " + strftime('%F %T', pacific)  + "</article>"
+    fragment += "</section>";
     $("#content").html(fragment);
   },
   updateBuildStatus : function (data) {
