@@ -7,8 +7,8 @@ var jenkinsDashboard = {
   addTimestampToBuild : function (elements) {
     elements.each(function () {
       var worker = $(this).attr("class"),
-      y = parseInt($(this).offset().top + $(this).height() / 2) - 16,
-      x = parseInt($(this).offset().left + $(this).width() / 2) - 16,
+      y = parseInt($(this).offset().top + $(this).height() / 2),
+      x = parseInt($(this).offset().left + $(this).width() / 2),
       id = x + "-" + y,
       html = '<div class="job_disabled_or_aborted" id="' + id + '">' + worker + '</div>',
       new_element;
@@ -19,61 +19,24 @@ var jenkinsDashboard = {
       $(this).addClass('workon');
     });
   },
-
-  // Composes and injects the dashboard HTML content.
-  componseHtmlContent: function(jobs) {
-    var content = new String;
-
-    content += jenkinsDashboard.composeHtmlEnvironmentSections(jobs);
-    dashboardLastUpdatedTime = new Date();
-    content += "<article class='time'>" + dashboardLastUpdatedTime.toLocaleString()  + "</article>";
-
-    $("#content").html(content);
-  },
-
-  // Composes and returns HTML sections for each environment.
-  composeHtmlEnvironmentSections: function(jobs) {
-    var sections = new String;
-
-    config.environments.forEach(function(environment) {
-      var matches = new Array;
-
-      jobs.forEach(function(job) {
-        if (job.name.match(new RegExp(environment + "$"))) {
-          // Remove the environment name from the job to reduce clutter.
-          job.name = job.name.replace(new RegExp("(-)?(?!firefox)" + environment), "");
-          matches.push(job);
-        }
-      });
-
-      sections += "<section>"
-      sections += "<h1>" + environment + "</h1>";
-      sections += jenkinsDashboard.composeHtmlJob(matches);
-      sections += "</section>"
-    });
-
-    return sections;
-  },
-
-  // Composes and returns HTML articles for each job.
-  composeHtmlJob: function (jobs) {
-    var article = new String;
-    var jobs_to_be_filtered = config.jobs_to_be_filtered,
-        jobs_to_be_excluded = config.jobs_to_be_excluded;
+  composeHtmlFragement: function (jobs) {
+    var fragment = "<section>",
+    jobs_to_be_filtered = config.jobs_to_be_filtered,
+    jobs_to_be_excluded = config.jobs_to_be_excluded;
     $.each(jobs, function () {
       if ((jobs_to_be_filtered.length === 0 || $.inArray(this.name, jobs_to_be_filtered) !== -1) && ($.inArray(this.name, jobs_to_be_excluded) === -1) && this.color != 'grey' && this.color != 'disabled') {
-        article += ("<article class=" + this.color + "><head>" + jenkinsDashboard.filterName(this.name)+ "</head></article>");
+        fragment += ("<article class=" + this.color + "><head>" + jenkinsDashboard.filterName(this.name)+ "</head></article>");
       }
     });
-
-    return article;
+    dashboardLastUpdatedTime = new Date();
+    fragment += "<article class='utctime'>" + dashboardLastUpdatedTime.toUTCString('dd, MMMM ,yyyy')  + "</article>";
+    fragment += "<article class='time'>" + dashboardLastUpdatedTime.toString('dd, MMMM ,yyyy')  + "</article></section>";
+    $("#content").html(fragment);
   },
-
   updateBuildStatus : function (data) {
-    jenkinsDashboard.componseHtmlContent(data.jobs);
+    jenkinsDashboard.composeHtmlFragement(data.jobs);
     jenkinsDashboard.addTimestampToBuild($(".disabled, .aborted"));
   },
-
   filterName: function(name) {
     name = name.replace(/^acceptance\-/, '');
     name = name.replace(/^jslint.*\-/, 'js');
