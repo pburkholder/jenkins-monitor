@@ -2,6 +2,11 @@
 /*globals $: false, config: false */
 
 var dashboardLastUpdatedTime = new Date();
+here_and_now = new Date
+var now = new Date();
+var now_utc = new Date();
+var now_pt = new Date();
+var now_et = new Date();
 
 var jenkinsDashboard = {
   addTimestampToBuild : function (elements) {
@@ -28,9 +33,20 @@ var jenkinsDashboard = {
         fragment += ("<article class=" + this.color + "><head>" + jenkinsDashboard.filterName(this.name)+ "</head></article>");
       }
     });
-    dashboardLastUpdatedTime = new Date();
-    fragment += "<article class='utctime'>" + dashboardLastUpdatedTime.toUTCString('dd, MMMM ,yyyy')  + "</article>";
-    fragment += "<article class='time'>" + dashboardLastUpdatedTime.toString('dd, MMMM ,yyyy')  + "</article></section>";
+
+
+    var now = new Date();
+    if ( now.getTimezoneOffset < 301 ) { 
+      eastern = now; 
+      pacific = now + ( 3 * 60 * 1000 );
+    } else {
+      pacific = now;
+      eastern = now - ( 3 * 60 * 1000 );
+    }
+    var utc = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(),  now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds());
+
+    fragment += "<article class='utctime'>" + "UTC: " + strftime('%F %T', utc)  + "</article>";
+    fragment += "<article class='time'>" + "Eastern: " + strftime('%F %T', now)  + "</article></section>";
     $("#content").html(fragment);
   },
   updateBuildStatus : function (data) {
