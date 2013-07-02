@@ -34,8 +34,19 @@ How to Use
 
   Then run from command line: 
 
-		open dashboard.html -a safari
+		open index.html -a safari
 		
+History/Credits
+-------
+
+The original jenkins-monitor is from https://github.com/tuo/jenkins-monitor, but I forked this from 
+[PaperlessPost](https://github.com/paperlesspost/jenkins-monitor) since they'd been busy with and added
+the pulsing red and blue blocks on repeated failures. I reverted out the 'environments' support, since I
+didn't need it.
+
+License
+-------
+None. I wish the original author would add one.
 
 Contribute
 ------------
